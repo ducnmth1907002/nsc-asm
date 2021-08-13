@@ -22,7 +22,6 @@ public class Client {
                     new BufferedReader(new InputStreamReader(System.in));
             send_to_server = inFromUser.readLine();
             Socket clientSocket = new Socket("127.0.0.1", 8088);
-            String clientIp=(((InetSocketAddress) clientSocket.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
 
             DataOutputStream outToServer =
                     new DataOutputStream(clientSocket.getOutputStream());
@@ -37,7 +36,7 @@ public class Client {
             send_from_server = inFromServer.readLine();
             String decrypted_msg = ac.decryptText(send_from_server, publicKey);
 
-            System.out.println(clientIp + " said: " + decrypted_msg);
+            System.out.println(decrypted_msg);
 
             clientSocket.close();
             if (decrypted_msg.equalsIgnoreCase("bye")) {

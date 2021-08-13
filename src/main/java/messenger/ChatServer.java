@@ -3,6 +3,7 @@ package messenger;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.PrivateKey;
@@ -30,12 +31,13 @@ public class ChatServer {
             send_from_client = inFromClient.readLine();
             String decrypted_msg = ac.decryptText(send_from_client, publicKey);
 
-            send_to_client = decrypted_msg;
+            String clientIp=(((InetSocketAddress) connectionSocket.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
+            send_to_client = clientIp + " said: " + decrypted_msg;
             String encrypted_msg = ac.encryptText(send_to_client, privateKey);
 
             outToClient.writeBytes(encrypted_msg + '\n');
 
-            System.out.println(decrypted_msg);
+            System.out.println(clientIp + " said: " + decrypted_msg);
 
             if (send_from_client.equalsIgnoreCase("bye")) {
                 return;
