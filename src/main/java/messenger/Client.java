@@ -39,7 +39,7 @@ public class Client {
             System.out.println(decrypted_msg);
 
             clientSocket.close();
-            if (decrypted_msg.equalsIgnoreCase("bye")) {
+            if (send_to_server.equalsIgnoreCase("bye")) {
                 return;
             }
         }

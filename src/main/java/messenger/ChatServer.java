@@ -39,7 +39,7 @@ public class ChatServer {
 
             System.out.println(clientIp + " said: " + decrypted_msg);
 
-            if (send_from_client.equalsIgnoreCase("bye")) {
+            if (decrypted_msg.equalsIgnoreCase("bye")) {
                 return;
             }
         }
